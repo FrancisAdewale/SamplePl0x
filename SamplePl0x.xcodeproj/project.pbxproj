@@ -12,6 +12,8 @@
 		76B3C4BF2645AE8400F4E005 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B3C4BE2645AE8400F4E005 /* ViewController.swift */; };
 		76B3C4C42645AE8700F4E005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76B3C4C32645AE8700F4E005 /* Assets.xcassets */; };
 		76B3C4C72645AE8700F4E005 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76B3C4C52645AE8700F4E005 /* LaunchScreen.storyboard */; };
+		76B3C4CF2645BCA400F4E005 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B3C4CE2645BCA400F4E005 /* K.swift */; };
+		76B3C4D22645C25C00F4E005 /* Roboto in Resources */ = {isa = PBXBuildFile; fileRef = 76B3C4D12645C25C00F4E005 /* Roboto */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		76B3C4C32645AE8700F4E005 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76B3C4C62645AE8700F4E005 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76B3C4C82645AE8700F4E005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76B3C4CE2645BCA400F4E005 /* K.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
+		76B3C4D12645C25C00F4E005 /* Roboto */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Roboto; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,24 @@
 		76B3C4B92645AE8400F4E005 /* SamplePl0x */ = {
 			isa = PBXGroup;
 			children = (
+				76B3C4D32645C5D500F4E005 /* Fonts */,
 				76B3C4BA2645AE8400F4E005 /* AppDelegate.swift */,
 				76B3C4BC2645AE8400F4E005 /* SceneDelegate.swift */,
 				76B3C4BE2645AE8400F4E005 /* ViewController.swift */,
 				76B3C4C32645AE8700F4E005 /* Assets.xcassets */,
 				76B3C4C52645AE8700F4E005 /* LaunchScreen.storyboard */,
 				76B3C4C82645AE8700F4E005 /* Info.plist */,
+				76B3C4CE2645BCA400F4E005 /* K.swift */,
 			);
 			path = SamplePl0x;
+			sourceTree = "<group>";
+		};
+		76B3C4D32645C5D500F4E005 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				76B3C4D12645C25C00F4E005 /* Roboto */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +137,7 @@
 			files = (
 				76B3C4C72645AE8700F4E005 /* LaunchScreen.storyboard in Resources */,
 				76B3C4C42645AE8700F4E005 /* Assets.xcassets in Resources */,
+				76B3C4D22645C25C00F4E005 /* Roboto in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76B3C4BF2645AE8400F4E005 /* ViewController.swift in Sources */,
+				76B3C4CF2645BCA400F4E005 /* K.swift in Sources */,
 				76B3C4BB2645AE8400F4E005 /* AppDelegate.swift in Sources */,
 				76B3C4BD2645AE8400F4E005 /* SceneDelegate.swift in Sources */,
 			);
