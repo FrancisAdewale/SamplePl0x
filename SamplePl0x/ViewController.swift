@@ -10,6 +10,19 @@ import UIKit
  class ViewController: UIViewController {
     
     
+    let sampleImage : UIButton = {
+        
+        let imageButton = UIButton()
+        imageButton.setImage(UIImage(named: "SampleImage"), for: .normal)
+        imageButton.translatesAutoresizingMaskIntoConstraints = false
+        imageButton.adjustsImageWhenHighlighted = false
+        imageButton.showsTouchWhenHighlighted = false
+        imageButton.contentMode = .scaleAspectFit
+        imageButton.addTarget(self, action: #selector(goToSample), for: .touchUpInside)
+        return imageButton
+        
+        
+    }()
     
     
     let setUpSampleField: UITextField = {
@@ -21,7 +34,6 @@ import UIKit
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = k.textColour
         textField.attributedPlaceholder = NSAttributedString(string: "PASTE YOUTUBE LINK", attributes: [NSAttributedString.Key.foregroundColor: k.textColour])
-        textField.font = k.p
     
         return textField
         
@@ -47,7 +59,7 @@ import UIKit
         let title = UILabel()
         title.text = k.appName
         title.textColor = k.textColour
-        title.font = UIFont(name: "Roboto-Bold", size: 90)
+        title.font = k.h1
         title.translatesAutoresizingMaskIntoConstraints = false
         
         return title
@@ -56,19 +68,12 @@ import UIKit
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        for family: String in UIFont.familyNames
-          {
-              print(family)
-              for names: String in UIFont.fontNames(forFamilyName: family)
-              {
-                  print("== \(names)")
-              }
-          }
-        
         setUpSubView.addSubview(setUpSampleField)
         view.addSubview(setUpSubView)
         view.addSubview(addH1Ttitle)
+        view.addSubview(sampleImage)
         view.backgroundColor = #colorLiteral(red: 0.9450980392, green: 0.9450980392, blue: 0.9450980392, alpha: 1)
+        navigationController?.navigationBar.isHidden = true
         setUpAutoLayout()
 
         // Do any additional setup after loading the view.
@@ -87,8 +92,22 @@ import UIKit
         setUpSampleField.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         addH1Ttitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        addH1Ttitle.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         
+        sampleImage.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -120 ).isActive = true
+        sampleImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        sampleImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        sampleImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
         
+   
+    }
+    
+    @objc func goToSample() {
+        
+        let svc = SampleAudioViewController()
+        svc.modalPresentationStyle = .fullScreen
+
+        navigationController?.present(svc, animated: true, completion: nil)
     }
 
 
