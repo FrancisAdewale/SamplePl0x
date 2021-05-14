@@ -6,11 +6,20 @@
 //
 
 import UIKit
+import MediaPlayer
 
  class ViewController: UIViewController {
     
+    var mpMediapicker: MPMediaPickerController!
+    var mediaItems = [MPMediaItem]()
+    let currentIndex = 0
+       
+
+    
     
     let sampleImage : UIButton = {
+        
+        
         
         let imageButton = UIButton()
         imageButton.setImage(UIImage(named: "SampleImage"), for: .normal)
@@ -19,24 +28,35 @@ import UIKit
         imageButton.showsTouchWhenHighlighted = false
         imageButton.contentMode = .scaleAspectFit
         imageButton.addTarget(self, action: #selector(goToSample), for: .touchUpInside)
+        
+        let hover = CABasicAnimation(keyPath: "position")
+            
+        hover.isAdditive = true
+        hover.fromValue = NSValue(cgPoint: CGPoint.zero)
+        hover.toValue = NSValue(cgPoint: CGPoint(x: 0.0, y:50.0))
+        hover.autoreverses = true
+        hover.duration = 1
+        hover.repeatCount = Float.infinity
+            
+       imageButton.layer.add(hover, forKey: "myHoverAnimation")
         return imageButton
         
         
     }()
     
     
-    let setUpSampleField: UITextField = {
+    let setUpStatusText: UILabel = {
+        
         let k = K()
 
-        var textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.backgroundColor = UIColor.gray
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textColor = k.textColour
-        textField.attributedPlaceholder = NSAttributedString(string: "PASTE YOUTUBE LINK", attributes: [NSAttributedString.Key.foregroundColor: k.textColour])
-    
-        return textField
         
+        let status = UILabel()
+        status.text = "Upload audio to sample"
+        status.textColor = k.textColour
+        status.font = k.p
+        status.translatesAutoresizingMaskIntoConstraints = false
+        
+        return status
     }()
     
     let setUpSubView: UIView = {
@@ -68,13 +88,19 @@ import UIKit
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpSubView.addSubview(setUpSampleField)
+        setUpSubView.addSubview(setUpStatusText)
         view.addSubview(setUpSubView)
         view.addSubview(addH1Ttitle)
         view.addSubview(sampleImage)
         view.backgroundColor = #colorLiteral(red: 0.9450980392, green: 0.9450980392, blue: 0.9450980392, alpha: 1)
         navigationController?.navigationBar.isHidden = true
         setUpAutoLayout()
+        
+        mpMediapicker = MPMediaPickerController.self(mediaTypes:MPMediaType.music)
+        mpMediapicker.allowsPickingMultipleItems = false
+        mpMediapicker.showsCloudItems = true
+        mpMediapicker.delegate = self
+        
 
         // Do any additional setup after loading the view.
     }
@@ -86,25 +112,34 @@ import UIKit
         setUpSubView.heightAnchor.constraint(equalToConstant: view.frame.height/3).isActive = true
         setUpSubView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        setUpSampleField.leftAnchor.constraint(equalTo: setUpSubView.leftAnchor, constant: 20).isActive = true
-        setUpSampleField.rightAnchor.constraint(equalTo: setUpSubView.rightAnchor, constant:  -20).isActive = true
-        setUpSampleField.centerYAnchor.constraint(equalTo: setUpSubView.centerYAnchor).isActive = true
-        setUpSampleField.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        setUpStatusText.centerXAnchor.constraint(equalTo: setUpSubView.centerXAnchor).isActive = true
+        setUpStatusText.centerYAnchor.constraint(equalTo: setUpSubView.centerYAnchor).isActive = true
         
+//        setUpSampleField.leftAnchor.constraint(equalTo: setUpSubView.leftAnchor, constant: 20).isActive = true
+//        setUpSampleField.rightAnchor.constraint(equalTo: setUpSubView.rightAnchor, constant:  -20).isActive = true
+//        setUpSampleField.centerYAnchor.constraint(equalTo: setUpSubView.centerYAnchor).isActive = true
+//        setUpSampleField.heightAnchor.constraint(equalToConstant: 80).isActive = true
+//
         addH1Ttitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         addH1Ttitle.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         
-        sampleImage.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -120 ).isActive = true
+        sampleImage.centerYAnchor.constraint(equalTo: view.bottomAnchor, constant: -110 ).isActive = true
         sampleImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        sampleImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        sampleImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        sampleImage.heightAnchor.constraint(equalToConstant: 140).isActive = true
+        sampleImage.widthAnchor.constraint(equalToConstant: 140).isActive = true
         
    
     }
     
     @objc func goToSample() {
         
+
+    self.present(mpMediapicker, animated: true, completion: nil)
+
+    
+        
         let svc = SampleAudioViewController()
+    
         svc.modalPresentationStyle = .fullScreen
 
         navigationController?.present(svc, animated: true, completion: nil)
@@ -113,3 +148,16 @@ import UIKit
 
 }
 
+extension ViewController: MPMediaPickerControllerDelegate {
+    
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        mediaItems = mediaItemCollection.items
+        
+
+
+    }
+    
+
+    
+    
+}
