@@ -101,6 +101,18 @@ import MediaPlayer
         mpMediapicker.showsCloudItems = true
         mpMediapicker.delegate = self
         
+        let fm = FileManager.default
+        let path = Bundle.main.resourcePath!
+
+        do {
+            let items = try fm.contentsOfDirectory(atPath: path)
+
+            for item in items {
+                print("Found \(item)")
+            }
+        } catch {
+            // failed to read directory – bad permissions, perhaps?
+        }
 
         // Do any additional setup after loading the view.
     }
