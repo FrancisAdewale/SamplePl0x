@@ -11,7 +11,7 @@ import MediaPlayer
  class ViewController: UIViewController {
     
     var mpMediapicker: MPMediaPickerController!
-    var mediaItems = [MPMediaItem]()
+    var mediaItem = MPMediaItem()
     let currentIndex = 0
        
 
@@ -97,7 +97,6 @@ import MediaPlayer
         setUpAutoLayout()
         
         mpMediapicker = MPMediaPickerController.self(mediaTypes:MPMediaType.music)
-        mpMediapicker.allowsPickingMultipleItems = false
         mpMediapicker.showsCloudItems = true
         mpMediapicker.delegate = self
         
@@ -162,10 +161,22 @@ import MediaPlayer
 
 extension ViewController: MPMediaPickerControllerDelegate {
     
+    
     func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        mediaItems = mediaItemCollection.items
+
+        mediaItem = mediaItemCollection.items.first!
         
 
+
+    }
+    
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
+        self.dismiss(animated: true) {
+            
+            self.setUpStatusText.text = self.mediaItem.description
+
+            
+        }
 
     }
     
